@@ -60,8 +60,8 @@ int main(int argc, char**argv)
              (struct sockaddr *)&servaddr,sizeof(servaddr));
       n=recvfrom(sockfd,recvline,10000,0,NULL,NULL);
       stop();
-      printf("%s--Latentcy : %llu ms\n",asctime( localtime(&ltime) ),t);
-      fprintf(fp,"%s--Latentcy : %llu ms\n",asctime( localtime(&ltime) ),t);
+      printf("%s--Latency : %llu ms\n",asctime( localtime(&ltime) ),t);
+      fprintf(fp,"%s--Latency : %llu ms\n",asctime( localtime(&ltime) ),t);
       fclose(fp);
       usleep(randr(60,300)*1000);
    }
