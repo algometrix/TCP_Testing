@@ -65,6 +65,6 @@ int main(int argc, char**argv)
       printf("%s , %llu ms\n",curr_time,t);
       fprintf(fp,"%s , %llu ms\n",curr_time,t);
       fclose(fp);
-      usleep(randr(60,300)*1000);
+      usleep(randr(60,300)*1000000);
    }
 }
