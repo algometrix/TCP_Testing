@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <modbus/modbus.h>
 static struct timeval tm1,tm2;
 unsigned long long t ;
 inline void start()
@@ -35,6 +36,8 @@ int main(int argc, char**argv)
    char sendline[1000];
    char recvline[1000];
    char filename[]="log.csv";
+   modbus_t *mb;
+   uint16_t tab_reg[32];
    char packet[]="RANDOMDATA\n";  // 11 bytes of payload
    if (argc != 2)
    {
@@ -56,9 +59,16 @@ int main(int argc, char**argv)
 	  fp=fopen(filename,"a+");
 	  ltime=time(NULL);
 	  start();
-	  sendto(sockfd,packet,strlen(packet),0,
-             (struct sockaddr *)&servaddr,sizeof(servaddr));
-      n=recvfrom(sockfd,recvline,10000,0,NULL,NULL);
+
+
+	  mb = modbus_new_tcp("127.0.0.1", 5022);
+	  modbus_connect(mb);
+
+	    /* Read 5 registers from the address 0 */
+	  modbus_read_registers(mb, 301, 1, tab_reg);
+	  printf("%d\n",tab_reg[0]);
+	  modbus_close(mb);
+	  modbus_free(mb);
       stop();
       char *curr_time = asctime( localtime(&ltime) );
       curr_time[strlen(curr_time) - 1] = 0;
