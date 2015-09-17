@@ -53,7 +53,7 @@ int main(int argc, char**argv)
 
    while (1)
    {
-	  fp=fopen(filename,"w+");
+	  fp=fopen(filename,"a+");
 	  ltime=time(NULL);
 	  start();
 	  sendto(sockfd,packet,strlen(packet),0,
