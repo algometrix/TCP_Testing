@@ -61,8 +61,7 @@ int main(int argc, char**argv)
 	  start();
 	  mb = modbus_new_tcp("127.0.0.1", 5022);
 	  modbus_connect(mb);
-	  modbus_read_registers(mb, 301, 1, tab_reg);
-	  printf("%d\n",tab_reg[0]);
+	  int r=modbus_read_registers(mb, 301, 1, tab_reg);
 	  modbus_close(mb);
 	  modbus_free(mb);
       stop();
