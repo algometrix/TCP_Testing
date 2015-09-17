@@ -59,12 +59,8 @@ int main(int argc, char**argv)
 	  fp=fopen(filename,"a+");
 	  ltime=time(NULL);
 	  start();
-
-
 	  mb = modbus_new_tcp("127.0.0.1", 5022);
 	  modbus_connect(mb);
-
-	    /* Read 5 registers from the address 0 */
 	  modbus_read_registers(mb, 301, 1, tab_reg);
 	  printf("%d\n",tab_reg[0]);
 	  modbus_close(mb);
